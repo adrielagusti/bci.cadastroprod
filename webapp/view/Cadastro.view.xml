@@ -1,0 +1,93 @@
+<mvc:View controllerName="br.com.fortlev.cadmaterialprod.cadmaterialprod.controller.Cadastro"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:ui="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+    <Page id="page" title="{i18n>cadastroTitle}">
+        <headerContent>
+            <Button id="save"   text="Salvar"    visible="{newModel>/save}"  press=".savePress" />
+            <Button id="conf"   text="Confirmar" visible="{newModel>/conf}" press=".confPress" />
+            <Button id="cancel" text="Cancelar"  visible="{newModel>/conf}" press=".cancPress" />
+		</headerContent>
+        <content>
+            <f:SimpleForm id="engenharia" layout="ResponsiveGridLayout"
+                    title="Engenharia">
+                <f:content>
+                    <Label text="Codigo do Material" />
+                    <Input editable="{newModel>/editable}" value="{cad>/CodMaterial}" />
+                    <Label text="Descrição" />
+                    <Input editable="{newModel>/editable}" value="{cad>/Descricao}" />
+                    <Label text="Descrição Longa" />
+                    <TextArea editable="{newModel>/editable}" width="100%" maxLength="1000" value="{cad>/DescricaoLonga}" />
+                    <Label text="Tipo do Material" />
+                    <ComboBox items="{path: '/TipoMatSet', sorter: { path: 'Mtart' }, length: '500'}" id="tipoMat" editable="{newModel>/editable}" selectedKey="{cad>/TipoMaterial}">
+                        <core:ListItem text="{Mtart} - {Mtbez}" key="{Mtart}"/>
+                    </ComboBox>
+                    <Label text="Materia Prima" />
+                    <ComboBox items="{path: '/MatPrimaSet', sorter: { path: 'MatPrim' }, length: '500'}" id="matPrima" editable="{newModel>/editable}" selectedKey="{cad>/MateriaPrima}">
+                        <core:ListItem text="{MatPrim} - {Zdescr}" key="{MatPrim}"/>
+                    </ComboBox>
+                    <Label text="Centro Produtivo" />
+                    <ComboBox items="{path: '/CentroSet', length: '500'}" id="centro" editable="{newModel>/editable}" selectedKey="{cad>/CentroProd}">
+                        <core:ListItem text="{Werks}" key="{Werks}"/>
+                    </ComboBox>
+                    <Label text="Processo Produtivo" />
+                    <ComboBox items="{path: '/ProcProducaoSet', sorter: { path: 'ProcPrd' }, length: '500'}" id="procProd" editable="{newModel>/editable}" selectedKey="{cad>/ProcessoProd}">
+                        <core:ListItem text="{ProcPrd} - {Zdescr}" key="{ProcPrd}"/>
+                    </ComboBox>
+                    <Label text="Unidade de Medida Básica" />
+                    <ComboBox items="{path: '/UMBasicaSet', length: '500'}" id="umbasica" editable="{newModel>/editable}" selectedKey="{cad>/UnidMedida}">
+                        <core:ListItem text="{Msehi} - {Msehl}" key="{Msehi}"/>
+                    </ComboBox>
+                    <Label text="Peso Líquido" />
+                    <Input editable="{newModel>/editable}" value="{cad>/PesoLiquido}" />
+                    <Label text="Peso Bruto" />
+                    <Input editable="{newModel>/editable}" value="{cad>/PesoBruto}" />
+                    <Label text="Unidade Peso" />
+                    <ComboBox items="{path: '/UMPesoSet', length: '500'}" id="umpeso" editable="{newModel>/editable}" selectedKey="{cad>/UnidPeso}">
+                        <core:ListItem text="{Msehi} - {Msehl}" key="{Msehi}"/>
+                    </ComboBox>
+                    <Label text="Volume" />
+                    <Input editable="{newModel>/editable}" value="{cad>/Volume}" />
+                    <Label text="Unidade Volume" />
+                    <ComboBox items="{path: '/UMVolumeSet', length: '500'}" id="umvolume" editable="{newModel>/editable}" selectedKey="{cad>/UnidVolume}">
+                        <core:ListItem text="{Msehi} - {Msehl}" key="{Msehi}"/>
+                    </ComboBox>
+                    <Label text="Dados Necessários" />
+                    <CheckBox text="Ean" editable="{newModel>/editable}" selected="{cad>/Ean}" >
+                    </CheckBox>
+                    <CheckBox text="Dun 14(1)" editable="{newModel>/editable}" selected="{cad>/Dun14}" >
+                        <layoutData>
+                            <l:GridData linebreak="true" indentL="2" indentM="2"/>
+                        </layoutData>
+                    </CheckBox>
+                    <CheckBox text="Dun 14(2)" editable="{newModel>/editable}" selected="{cad>/Dun142}">
+                        <layoutData>
+                            <l:GridData linebreak="true" indentL="2" indentM="2"/>
+                        </layoutData>
+                    </CheckBox>
+                    <CheckBox text="Visão de Qualidade" editable="{newModel>/editable}" selected="{cad>/VisaoQm}">
+                        <layoutData>
+                            <l:GridData linebreak="true" indentL="2" indentM="2"/>
+                        </layoutData>
+                    </CheckBox>
+                    <Label text="Ctgs Item Material" />
+                    <ComboBox items="{path: '/CtgItMatSet', sorter: { path: 'Mtpos' }, length: '500'}" id="ctMat" editable="{newModel>/editable}" selectedKey="{cad>/CtgsIMaterial}">
+                        <core:ListItem text="{Mtpos} - {Zdescr}" key="{Mtpos}"/>
+                    </ComboBox>
+                    <Label text="Finalidade do Produto" />
+                    <Input editable="{newModel>/editable}" value="{cad>/FinalidadeProd}" />
+                    <Label text="Lote Obrigatório?" />
+                    <CheckBox editable="{newModel>/editable}" selected="{cad>/LoteObrig}">
+                    </CheckBox>
+                    <Label text="Urgente?" />
+                    <CheckBox editable="{newModel>/editable}" selected="{cad>/Urgente}">
+                    </CheckBox>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+    </Page>
+</mvc:View>

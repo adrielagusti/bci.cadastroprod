@@ -1,0 +1,537 @@
+<mvc:View controllerName="br.com.fortlev.cadmaterialprod.cadmaterialprod.controller.Detalhes" 
+          xmlns="sap.m" 
+          xmlns:mvc="sap.ui.core.mvc"
+          xmlns:f="sap.ui.layout.form"
+          xmlns:l="sap.ui.layout"
+          xmlns:core="sap.ui.core"
+          xmlns:ui="sap.ui.table"
+          displayBlock="true">
+        
+    <Page title="{i18n>detalhesTitle}"
+          showNavButton="false"
+          navButtonPress=".onNavBack">
+        <headerContent>
+            <VBox visible="{global>/save}">
+                <Button id="save"   text="Salvar" visible="{newModel>/save}" press=".savePress" />
+            </VBox>
+            <VBox visible="{global>/save}">
+                <Button id="cancel" text="Cancelar"  visible="{newModel>/save}" press=".cancPress" />
+            </VBox>
+		</headerContent>
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <f:SimpleForm id="geral" editable="false" layout="ResponsiveGridLayout"
+                    title="Geral">
+                    <f:content>
+                        <Label text="ID do Processo" />
+                        <Input editable="false" value="{geral>/IdProc}" />
+                        <Label text="Codigo do Material" />
+                        <Input editable="false" value="{geral>/CodMaterial}" />
+                        <Label text="Status" />
+                        <Input editable="false" value="{geral>/Status}" />
+                        <Label text="Data da solicitação" />
+                        <Input editable="false" value="{geral>/DtCriacao}" />
+                        <Label text="Urgente?" />
+                        <CheckBox editable="false" selected="{geral>/Urgente}">
+                        </CheckBox>
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm id="engenharia" visible="{global>/engenharia}" editable="{newModel>/engenharia}" layout="ResponsiveGridLayout"
+                    title="Engenharia">
+                    <f:content>
+                        <Label text="Descrição" />
+                        <Input editable="false" value="{engenharia>/Descricao}" />
+                        <Label text="Descrição Longa" />
+                        <Input editable="false" value="{engenharia>/DescricaoLonga}" />
+                        <Label text="Tipo do Material" />
+                        <Input editable="false" value="{engenharia>/TipoMaterial}" />
+                        <Label text="Materia Prima" />
+                        <Input editable="false" value="{engenharia>/MateriaPrima}" />
+                        <Label text="Centro Produtivo" />
+                        <Input editable="false" value="{engenharia>/CentroProd}" />
+                        <Label text="Processo Produtivo" />
+                        <Input editable="false" value="{engenharia>/ProcessoProd}" />
+                        <Label text="Unidade de Medida Básica" />
+                        <Input editable="false" value="{engenharia>/UnidMedida}" />
+                        <Label text="Peso Líquido" />
+                        <Input editable="false" value="{engenharia>/PesoLiquido}" />
+                        <Label text="Peso Bruto" />
+                        <Input editable="false" value="{engenharia>/PesoBruto}" />
+                        <Label text="Unidade Peso" />
+                        <Input editable="false" value="{engenharia>/UnidPeso}" />
+                        <Label text="Volume" />
+                        <Input editable="false" value="{engenharia>/Volume}" />
+                        <Label text="Unidade Volume" />
+                        <Input editable="false" value="{engenharia>/UnidVolume}" />
+                        <Label text="Dados Necessários" />
+                        <CheckBox text="Ean" editable="false" selected="{engenharia>/Ean}" >
+                        </CheckBox>
+                        <CheckBox text="Dun 14(1)" editable="false" selected="{engenharia>/Dun14}" >
+                            <layoutData>
+                                <l:GridData linebreak="true" indentL="2" indentM="2"/>
+                            </layoutData>
+                        </CheckBox>
+                        <CheckBox text="Dun 14(2)" editable="false" selected="{engenharia>/Dun142}">
+                            <layoutData>
+                                <l:GridData linebreak="true" indentL="2" indentM="2"/>
+                            </layoutData>
+                        </CheckBox>
+                        <CheckBox text="Visão de Qualidade" editable="false" selected="{engenharia>/VisaoQm}">
+                            <layoutData>
+                                <l:GridData linebreak="true" indentL="2" indentM="2"/>
+                            </layoutData>
+                        </CheckBox>
+                        <Label text="Ctgs Item Material" />
+                        <Input editable="false" value="{engenharia>/CtgsIMaterial}" />
+                        <Label text="Finalidade do Produto" />
+                        <Input editable="false" value="{engenharia>/FinalidadeProd}" />
+                        <Label text="Lote Obrigatório?" />
+                        <CheckBox editable="false" selected="{engenharia>/LoteObrig}">
+                        </CheckBox>
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm id="manufatura" visible="{global>/manufatura}" editable="{newModel>/manufatura}" layout="ResponsiveGridLayout"
+                    title="Manufatura">
+                    <f:toolbar>
+                        <Toolbar>
+                            <Title text="Manufatura"/>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" tooltip="Adicionar Linha" press="onPressAddManufatura" visible="{add>/manufatura}" />
+                        </Toolbar>
+                    </f:toolbar>
+                    <f:content>
+                        <ui:Table
+                            rows="{ path: 'manufatura>/results', events: { change: '.onBindingChangeManufatura' } }"
+                            selectionMode="None"
+                            enableSelectAll="false"
+                            id="manufaturaTab">
+                            <ui:columns>
+                                <ui:Column
+                                    sortProperty="CentroProd"
+                                    filterProperty="CentroProd">
+                                    <Label text="Centro" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/CentroSet', length: '500'}" id="centro3" editable="{newModel>/manufatura}" selectedKey="{manufatura>CentroProd}">
+                                            <core:ListItem text="{Werks}" key="{Werks}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="InstrProd"
+                                    filterProperty="InstrProd">
+                                    <Label text="Instr.prod./controle" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/manufatura}" value="{manufatura>InstrProd}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="TipoAvaliacao"
+                                    filterProperty="TipoAvaliacao">
+                                    <Label text="Tipo de Avaliação" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/TpAvalSet', sorter: { path: 'Bwtar' }, length: '500'}" id="tpAval" editable="{newModel>/manufatura}" selectedKey="{manufatura>TipoAvaliacao}">
+                                            <core:ListItem text="{Bwtar} - {Zdescr}" key="{Bwtar}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="DepProd"
+                                    filterProperty="DepProd">
+                                    <Label text="Dpst. Produção" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/DepProdSet', sorter: { path: 'Lgpro' }, length: '500'}" id="depProd" editable="{newModel>/manufatura}" selectedKey="{manufatura>DepProd}">
+                                            <core:ListItem text="{Lgpro} - {Zdescr}" key="{Lgpro}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="RespControl"
+                                    filterProperty="RespControl">
+                                    <Label text="Respon.ctrl.produção" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/manufatura}" value="{manufatura>RespControl}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="PerfilProduc"
+                                    filterProperty="PerfilProduc">
+                                    <Label text="Perfil de Produção" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/PerfCProdSet', sorter: { path: 'Sfcpf' }, length: '500'}" id="perfProd" editable="{newModel>/manufatura}" selectedKey="{manufatura>PerfilProduc}">
+                                            <core:ListItem text="{Sfcpf} - {Zdescr}" key="{Sfcpf}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="VerifDisp"
+                                    filterProperty="VerifDisp">
+                                    <Label text="Verif.dispon." />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/VerDispSet', sorter: { path: 'Mtvfp' }, length: '500'}" id="verDisp" editable="{newModel>/manufatura}" selectedKey="{manufatura>VerifDisp}">
+                                            <core:ListItem text="{Mtvfp} - {Zdescr}" key="{Mtvfp}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="DepSupExt"
+                                    filterProperty="DepSupExt">
+                                    <Label text="Dep.supr.ext." />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/manufatura}" value="{manufatura>DepSupExt}" />
+                                    </ui:template>
+                                </ui:Column>
+                            </ui:columns>
+                        </ui:Table>
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm id="logistica" visible="{global>/logistica}" editable="{newModel>/logistica}" layout="ResponsiveGridLayout"
+                    title="Logistica">
+                    <f:toolbar>
+                        <Toolbar>
+                            <Title text="Logistica"/>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" tooltip="Adicionar Linha" press="onPressAddLogistica" visible="{add>/logistica}" />
+                        </Toolbar>
+                    </f:toolbar>
+                    <f:content>
+                        <ui:Table
+                            rows="{ path: 'logistica>/results', events: { change: '.onBindingChangeLogistica' } }"
+                            selectionMode="None"
+                            enableSelectAll="false"
+                            id="logisticaTab">
+                            <ui:columns>
+                                <ui:Column
+                                    sortProperty="Centro"
+                                    filterProperty="Centro">
+                                    <Label text="Centro" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/CentroSet', length: '500'}" id="centro" editable="false" selectedKey="{logistica>Centro}">
+                                            <core:ListItem text="{Werks}" key="{Werks}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="AreaArmazemanento"
+                                    filterProperty="AreaArmazemanento">
+                                    <Label text="Area de Armazenamento" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/AreaArmazSet', sorter: { path: 'Lgbkz' }, length: '500'}" id="areaArm" editable="{newModel>/logistica}" selectedKey="{logistica>AreaArmazemanento}">
+                                            <core:ListItem text="{Lgbkz} - {Zdescr}" key="{Lgbkz}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="DepositEntrada"
+                                    filterProperty="DepositEntrada">
+                                    <Label text="Depósito de Entrada" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/DepEntrSet', sorter: { path: 'Ltkze' }, length: '500'}" id="depEntrada" editable="{newModel>/logistica}" selectedKey="{logistica>DepositEntrada}">
+                                            <core:ListItem text="{Ltkze} - {Zdescr}" key="{Ltkze}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="DepositSaida"
+                                    filterProperty="DepositSaida">
+                                    <Label text="Depósito de Saida" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/DepSaidSet', sorter: { path: 'Ltkza' }, length: '500'}" id="depSaida" editable="{newModel>/logistica}" selectedKey="{logistica>DepositSaida}">
+                                            <core:ListItem text="{Ltkza} - {Zdescr}" key="{Ltkza}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="Dun14"
+                                    filterProperty="Dun14">
+                                    <Label text="Dun 14 (1)" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/logistica}" value="{logistica>Dun14}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="Dun142"
+                                    filterProperty="Dun142">
+                                    <Label text="Dun 14 (2)" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/logistica}" value="{logistica>Dun142}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="Ean"
+                                    filterProperty="Ean">
+                                    <Label text="EAN" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/logistica}" value="{logistica>Ean}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="GFreteMerc"
+                                    filterProperty="GFreteMerc">
+                                    <Label text="Grupo de Frete de Mercadoria" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/GrpFreteSet', sorter: { path: 'Mfrgr' }, length: '500'}" id="grpFrete" editable="{newModel>/logistica}" selectedKey="{logistica>GFreteMerc}">
+                                            <core:ListItem text="{Mfrgr} - {Zdescr}" key="{Mfrgr}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="TipoDeposito"
+                                    filterProperty="TipoDeposito">
+                                    <Label text="Tipo Deposito" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/TpDeposSet', sorter: { path: 'Lgtyp' }, length: '500'}" id="tpDepos" editable="{newModel>/logistica}" selectedKey="{logistica>TipoDeposito}">
+                                            <core:ListItem text="{Lgtyp} - {Zdescr}" key="{Lgtyp}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="Volume"
+                                    filterProperty="Volume">
+                                    <Label text="Volume" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/logistica}" value="{logistica>Volume}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="UnidVolume"
+                                    filterProperty="UnidVolume">
+                                    <Label text="Unidade de Volume" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/logistica}" value="{logistica>UnidVolume}" />
+                                    </ui:template>
+                                </ui:Column>
+                            </ui:columns>
+                        </ui:Table>
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm id="comercial" visible="{global>/comercial}" editable="{newModel>/comercial}" layout="ResponsiveGridLayout"
+                    title="Comercial">
+                    <f:toolbar>
+                        <Toolbar>
+                            <Title text="Comercial"/>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" tooltip="Adicionar Linha" press="onPressAddComercial" visible="{add>/comercial}" />
+                        </Toolbar>
+                    </f:toolbar>
+                    <f:content>
+                        <ui:Table
+                            rows="{ path: 'comercial>/results', events: { change: '.onBindingChangeComercial' } }"
+                            selectionMode="None"
+                            enableSelectAll="false"
+                            id="comercialTab">
+                            <ui:columns>
+                                <ui:Column
+                                    sortProperty="GrupoComiss"
+                                    filterProperty="GrupoComiss">
+                                    <Label text="Grupo de Comissão" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/GrupoComisSet', sorter: { path: 'Provg' }, length: '500'}" id="grpComis" editable="{newModel>/comercial}" selectedKey="{comercial>GrupoComiss}">
+                                            <core:ListItem text="{Provg} - {Zdescr}" key="{Provg}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="HierarquiaProd"
+                                    filterProperty="HierarquiaProd">
+                                    <Label text="Hierarquia de Produtos" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/comercial}" value="{comercial>HierarquiaProd}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="UmRemessa"
+                                    filterProperty="UmRemessa">
+                                    <Label text="UM Remessa" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/comercial}" value="{comercial>UmRemessa}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="GrCatIt"
+                                    filterProperty="GrCatIt">
+                                    <Label text="Grupo ctgs.item" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/comercial}" value="{comercial>GrCatIt}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="StatusMat"
+                                    filterProperty="StatusMat">
+                                    <Label text="Grp.estatística" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/comercial}" value="{comercial>StatusMat}" maxLength="1" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="OrgVendas"
+                                    filterProperty="OrgVendas">
+                                    <Label text="Org.vendas" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/OrgVendasSet', sorter: { path: 'VkorgSh' }, length: '500'}" id="orgVendas" editable="{newModel>/comercial}" selectedKey="{comercial>OrgVendas}">
+                                            <core:ListItem text="{VkorgSh} - {Zdescr}" key="{VkorgSh}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="CanalDist"
+                                    filterProperty="CanalDist">
+                                    <Label text="Canal de Distribuição" />
+                                    <ui:template>
+                                        <ComboBox items="{path: '/CanalDistSet', sorter: { path: 'VtwegSh' }, length: '500'}" id="canalDist" editable="{newModel>/comercial}" selectedKey="{comercial>CanalDist}">
+                                            <core:ListItem text="{VtwegSh} - {Zdescr}" key="{VtwegSh}"/>
+                                        </ComboBox>
+                                    </ui:template>
+                                </ui:Column>
+                            </ui:columns>
+                        </ui:Table>
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm id="fiscal" visible="{global>/fiscal}" editable="{newModel>/fiscal}" layout="ResponsiveGridLayout"
+                    title="Fiscal">
+                    <f:content>
+                        <Label text="NCM" />
+                        <Input editable="{newModel>/fiscal}" value="{fiscal>/Ncm}" />
+                        <Label text="Hierarquia Prod" />
+                        <Input editable="{newModel>/fiscal}" value="{fiscal>/HierarquiaProd}" />
+                        <Label text="Cod Material" />
+                        <Input editable="false" value="{geral>/CodMaterial}" />
+                        <Label text="MAT categoria CFOP" />
+                        <Input editable="false" value="0" />
+                        <Label text="Classif fiscal do mat" />
+                        <Input editable="false" value="1" />
+                        
+                    </f:content>
+                </f:SimpleForm>
+                <f:SimpleForm id="contabilidade" visible="{global>/contabilidade}" editable="{newModel>/contabilidade}" layout="ResponsiveGridLayout"
+                    title="Contabilidade">
+                    <f:toolbar>
+                        <Toolbar>
+                            <Title text="Contabilidade"/>
+                            <ToolbarSpacer/>
+                            <Button icon="sap-icon://add" tooltip="Adicionar Linha" press="onPressAddContabilidade" visible="{add>/contabilidade}" />
+                        </Toolbar>
+                    </f:toolbar>
+                    <f:content>
+                        <ui:Table
+                            rows="{ path: 'contabilidade>/results', events: { change: '.onBindingChangeContabilidade' } }"
+                            selectionMode="None"
+                            enableSelectAll="false"
+                            id="contabilidadeTab">
+                            <ui:columns>
+                                <ui:Column>
+                                    <Label text="Código Material" />
+                                    <ui:template>
+                                        <Input enabled="false" value="{geral>/CodMaterial}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="Centro"
+                                    filterProperty="Centro">
+                                    <Label text="Centro" />
+                                    <ui:template>
+                                        <Select  items="{path: '/CentroSet', length: '500'}" id="centro2" editable="{newModel>/contabilidade}" selectedKey="{contabilidade>Centro}">
+                                            <core:ListItem text="{Werks}" key="{Werks}"/>
+                                        </Select>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="ClasseAvaliacao"
+                                    filterProperty="ClasseAvaliacao">
+                                    <Label text="Classe de Avaliação" />
+                                    <ui:template>
+                                        <Select items="{path: '/CAvalSet', sorter: { path: 'Bklas' }, length: '500'}" id="cAval" editable="{newModel>/contabilidade}" selectedKey="{contabilidade>ClasseAvaliacao}">
+                                            <core:ListItem text="{Bklas} - {Bkbez}" key="{Bklas}"/>
+                                        </Select>
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column
+                                    sortProperty="CentroLucro"
+                                    filterProperty="CentroLucro">
+                                    <Label text="Centro de Lucro" />
+                                    <ui:template>
+                                        <Input enabled="true" editable="{newModel>/contabilidade}" value="{contabilidade>CentroLucro}" />
+                                    </ui:template>
+                                </ui:Column>
+                                <ui:Column>
+                                    <Label text="Código de controle de preço"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="V" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                 <ui:Column>
+                                    <Label text="Preço médio"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="0,01" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                 <ui:Column>
+                                    <Label text="Preço standard"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="0,01" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                 <ui:Column>
+                                    <Label text="Unidade de preço"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="100" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                 <ui:Column>
+                                    <Label text="Determinação de preço"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="2" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                 <ui:Column>
+                                    <Label text="Categoria de avaliação"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="Z" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                 <ui:Column>
+                                    <Label text="Utilização de material"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="1" />
+                                    </ui:template>
+                                </ui:Column>
+
+                                 <ui:Column>
+                                    <Label text="Origem de material"/>
+                                    <ui:template>
+                                        <Input enabled="false" value="0" />
+                                    </ui:template>
+                                </ui:Column>
+                            </ui:columns>
+                        </ui:Table>
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+        	<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Aceitar" press="savePress"/>
+				<Button type="Reject" text="Declínio" press="onReject"/>
+                <!-- <Button type="Default" text="Reiniciar" press="onChange"/> -->
+        		<MenuButton text="Alterar status"  defaultAction="onDefaultAction" beforeMenuOpen="onBeforeMenuOpen" useDefaultActionOnly="true">
+			<menu>
+				<Menu itemSelected="onMenuAction">
+                    <MenuItem text="Engenharia" icon="sap-icon://technical-object" />
+					<MenuItem text="Manufatura" icon="sap-icon://factory" />
+					<MenuItem text="Logistica" icon="sap-icon://shipping-status" />
+					<MenuItem text="Comercial" icon="sap-icon://lead" />
+					<MenuItem text="Fiscal" icon="sap-icon://open-folder" />
+					<MenuItem text="Contabilidade" icon="sap-icon://capital-projects" />
+				</Menu>
+			</menu>
+		</MenuButton>
+			</OverflowToolbar>
+		</footer>
+    </Page>
+</mvc:View>

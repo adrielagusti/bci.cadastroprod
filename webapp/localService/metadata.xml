@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCAD_MATERIAL_PROD_SRV" xml:lang="pt" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Geral" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Status do Fluxo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Engenharia" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Descricao" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Denominação" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescricaoLonga" Type="Edm.String" Nullable="false" MaxLength="1000" sap:unicode="false" sap:label="Texto Longo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoMaterial" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Tipo material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MateriaPrima" Type="Edm.String" Nullable="false" MaxLength="28" sap:unicode="false" sap:label="Tp de Materia Prima" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CentroProd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProcessoProd" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="Processo Produtivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UnidMedida" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="UM básica" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="PesoLiquido" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="UnidPeso" sap:label="Peso líquido" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PesoBruto" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="UnidPeso" sap:label="Peso bruto" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UnidPeso" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unidade de peso" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Volume" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="UnidVolume" sap:label="Volume" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UnidVolume" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unidade volume" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Ean" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag - EAN" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dun14" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag - Dun14" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VisaoQm" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag - Visao QM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CtgsIMaterial" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Grupo ctgs.item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dun142" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag - Dun14 - 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FinalidadeProd" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Finalidade do Produt" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LoteObrig" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Flag - Lote Obrigato" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Manufatura" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                    <PropertyRef Name="CentroProd"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CentroProd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="InstrProd" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Prod./controle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoAvaliacao" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo avaliação" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DepProd" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Dpst.produção" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RespControl" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Planejador MRP" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PerfilProduc" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Perfil ctrl.prod." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VerifDisp" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Verif.dispon." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DepSupExt" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Dep.supr.ext." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Logistica" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                    <PropertyRef Name="Centro"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Centro" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AreaArmazemanento" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Cód.área armaz." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DepositEntrada" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="CdCgDpst-Entrada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DepositSaida" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="CdCgDpst-Saída" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dun14" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Código EAN/UPC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dun142" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Código EAN/UPC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ean" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Código EAN/UPC" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GFreteMerc" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Grp.frete mat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoDeposito" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Tipo depósito" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Volume" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:unit="UnidVolume" sap:label="Volume" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UnidVolume" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unidade volume" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Comercial" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                    <PropertyRef Name="GrupoComiss"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GrupoComiss" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Grupo comissões" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HierarquiaProd" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Hierar.produtos" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="UmRemessa" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:label="Qtd.mínima" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="GrCatIt" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Grupo ctgs.item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatusMat" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Grp.estatística" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OrgVendas" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Org.vendas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CanalDist" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Canal distrib." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Fiscal" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ncm" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Cód.controle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="HierarquiaProd" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Hierar.produtos" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Contabilidade" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                    <PropertyRef Name="Centro"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Centro" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ClasseAvaliacao" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Classe avaliaç." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CentroLucro" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Centro de lucro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Suprimentos" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdProc"/>
+                    <PropertyRef Name="CodMaterial"/>
+                </Key>
+                <Property Name="IdProc" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="ID Fluxo de Mat" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CodMaterial" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtCriacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DtModificacao" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Últ.modif." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuario" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZCAD_MATERIAL_PROD_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="GeralSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Geral" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="EngenhariaSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Engenharia" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ManufaturaSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Manufatura" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="LogisticaSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Logistica" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ComercialSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Comercial" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="FiscalSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Fiscal" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ContabilidadeSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Contabilidade" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SuprimentosSet" EntityType="ZCAD_MATERIAL_PROD_SRV.Suprimentos" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://sap-erp-apd01.fortlev.com.br:8001/sap/opu/odata/sap/ZCAD_MATERIAL_PROD_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://sap-erp-apd01.fortlev.com.br:8001/sap/opu/odata/sap/ZCAD_MATERIAL_PROD_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
